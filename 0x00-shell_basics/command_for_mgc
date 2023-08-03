@@ -1,0 +1,14 @@
+offset type test description
+!:mine file/mime-type
+
+
+#then to create magic file run:
+file -C -m magic_filename
+
+#and to run it
+
+file -m magic_filename file*
+#or
+file -m magic_filename *
+#or 
+file --mime-type -m magic_filename *
