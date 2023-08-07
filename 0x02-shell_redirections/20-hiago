@@ -1,2 +1,2 @@
 #!/bin/bash
-cat $@ | re -d cC
+cat $@ | tr -d cC
