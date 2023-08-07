@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Enter file name"
+
+read f_name
+
+echo "#!/bin/bash" >> $f_name
+vim $f_name
+
+chmod u+x $f_name
+
