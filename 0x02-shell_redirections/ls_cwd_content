@@ -1,0 +1,18 @@
+total 64
+drwxrwxr-x 2 mo7amed mo7amed 4096 Aug  7 21:07 .
+drwxrwxr-x 6 mo7amed mo7amed 4096 Aug  7 18:59 ..
+-rwxrw-r-- 1 mo7amed mo7amed   32 Aug  7 19:05 0-hello_world
+-rw-rw-r-- 1 mo7amed mo7amed   15 Aug  7 19:52 1
+-rwxrw-r-- 1 mo7amed mo7amed   28 Aug  7 19:08 1-confused_smiley
+-rwxrw-r-- 1 mo7amed mo7amed   28 Aug  7 19:18 2-hellofile
+-rwxrw-r-- 1 mo7amed mo7amed   39 Aug  7 19:22 3-twofiles
+-rwxrw-r-- 1 mo7amed mo7amed   29 Aug  7 19:29 4-lastlines
+-rwxrw-r-- 1 mo7amed mo7amed   29 Aug  7 19:30 5-firstlines
+-rwxrw-r-- 1 mo7amed mo7amed   30 Aug  7 20:14 6-third_line
+-rwxrw-r-- 1 mo7amed mo7amed   79 Aug  7 21:05 7-file
+-rwxrw-r-- 1 mo7amed mo7amed   36 Aug  7 21:07 8-cwd_state
+-rw-rw-r-- 1 mo7amed mo7amed  744 Aug  7 19:32 iacta
+-rw-rw-r-- 1 mo7amed mo7amed    0 Aug  7 21:07 ls_cwd_content
+-rw-rw-r-- 1 mo7amed mo7amed   24 Aug  7 19:16 README.md
+-rwxrw-r-- 1 mo7amed mo7amed  158 Aug  7 19:29 script
+-rw-rw-r-- 1 mo7amed mo7amed   30 Aug  7 20:03 tail
