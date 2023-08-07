@@ -8,4 +8,6 @@ echo "#!/bin/bash" >> $f_name
 vim $f_name
 
 chmod u+x $f_name
-
+git add $f_name
+git commit $f_name
+git push
