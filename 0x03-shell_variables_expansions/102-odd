@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -l | tail -n +2| cut -d " " -f 11 |paste -d ' ' - -|cut -d " " -f 1
+ls -1 | paste -d ' ' - -|cut -d " " -f 1
