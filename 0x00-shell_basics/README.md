@@ -1,5 +1,6 @@
 # 0x00-shell_basics
-## The following is a description of each script
+## Description of script functionality
+
 **0-current_working_directory** - a script that prints the absolute path name of the current working directory.
 
 **1-listit** - a script that displays the contents list of the current directory.
