@@ -4,8 +4,8 @@
 function infinite() {
 	D="/var/run"
 	S="myscript.pid"
-	sudo touch "$D/$S"
-	sudo chmod 766 "$D/$S"
+	touch "$D/$S"
+	chmod 766 "$D/$S"
 	echo $$ > "$D/$S"
 	trap "trap_sigquit_term" SIGTERM
 	trap '
