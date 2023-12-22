@@ -4,11 +4,14 @@
 function infinite() {
 	D="/var/run"
 	S="myscript.pid"
-	mkdir -p $D
 	sudo touch "$D/$S"
 	sudo chmod 766 "$D/$S"
-	echo $$ > "$D/$S"	
-	trap "trap_sigquit_term" SIGTERM SIGQUIT
+	echo $$ > "$D/$S"
+	trap "trap_sigquit_term" SIGTERM
+	trap '
+	rm -f "$D/$S" 2>/dev/null
+	exit 0
+	' SIGQUIT
 	trap "trap_sigint" SIGINT
 	while true
 	do
@@ -27,7 +30,7 @@ function trap_sigint()	{
 
 
 function trap_sigquit_term()	{
-	sudo rm /var/run/myscript.pid
+	rm -f "/var/run/myscript.pid" 2>/dev/null
 	echo "I hate the kill command"
 	exit 0
 }
