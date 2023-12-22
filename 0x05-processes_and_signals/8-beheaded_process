@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# kills the infinite process using pkill
+
+pkill --signal SIGKILL -f 7-highlander
