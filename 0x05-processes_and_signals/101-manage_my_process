@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+function start() {
+	./manage_my_process &
+	D="/var/run/my_process.pid"
+	sudo touch "$D"
+	sudo chmod 766 "$D"
+	echo $! > "$D"
+}
+
+function stop() {
+	D="/var/run/my_process.pid"
+	my_pid=$(cat $D)
+	sudo kill "$my_pid"
+	sudo rm "/var/run/my_process.pid"
+
+}
+
+case $1 in
+	"start")
+		start
+		echo "manage_my_process started";;
+
+	"stop")
+		stop
+		echo "manage_my_process stopped";;
+	
+	"restart")
+		stop
+		start
+		echo "manage_my_process restarted";;
+
+
+	*)
+		echo "Usage: manage_my_process {start|stop|restart}";;
+esac
+
