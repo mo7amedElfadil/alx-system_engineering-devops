@@ -2,11 +2,11 @@
 # infinite loop that doesnt die to SIGTERM
 
 function infinite() {
+	trap "trap_sigterm" SIGTERM
 	while true
 	do
 		echo "To infinity and beyond"
 		sleep 2
-		trap "trap_sigterm" SIGTERM
 
 	done
 }
