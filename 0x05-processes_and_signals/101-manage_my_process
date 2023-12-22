@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# that manages manage_my_process daemon process
 
 function start_process() {
 	D="/var/run/my_process.pid"
