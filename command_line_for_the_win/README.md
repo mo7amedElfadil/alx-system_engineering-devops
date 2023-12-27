@@ -15,6 +15,9 @@ The steps involved were:
 sftp the_sftp_username@the_sftp_host.alx-cod.online
 cd /root/alx-system_engineering-devops/command_line_for_the_win/
 put 0-first_9_tasks.png
+put 0-first_9_tasks.jpg
 put 1-next_9_tasks.png
+put 1-next_9_tasks.jpg
 put 2-next_9_tasks.png
+put 2-next_9_tasks.jpg
 exit
