@@ -1,0 +1,6 @@
+*.pub
+!/0-RSA_public_key.pub
+!/*.sh
+!/README.md
+!/LICENSE
+zombie

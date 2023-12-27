@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# that manages manage_my_process daemon process
+
+function start_process() {
+	D="/var/run/my_process.pid"
+	P="manage_my_process"
+	exec "./$P" &
+	sudo touch "$D"
+	sudo chmod 766 "$D"
+	echo $! > "$D"
+}
+
+function stop_process() {
+	D="/var/run/my_process.pid"
+	kill "$(< "${D}")"
+	sudo rm -f "$D"
+
+}
+
+case $1 in
+	"start")
+		start_process
+		echo "manage_my_process started";;
+
+	"stop")
+		stop_process
+		echo "manage_my_process stopped";;
+	
+	"restart")
+		stop_process
+		start_process
+		echo "manage_my_process restarted";;
+
+
+	*)
+		echo "Usage: manage_my_process {start|stop|restart}";;
+esac
+

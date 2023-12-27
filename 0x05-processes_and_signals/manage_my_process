@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# infinite loop that doesnt die to SIGTERM
+
+function manage() {
+	D="/tmp"
+	S="my_process"
+	touch "$D/$S"
+	chmod 766 "$D/$S"
+	while true
+	do
+		echo "I am alive!" >> "$D/$S"	
+		sleep 2
+	done
+}
+manage

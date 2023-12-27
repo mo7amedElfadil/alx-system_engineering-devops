@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# infinite loop that doesnt die to SIGTERM
+
+function infinite() {
+	D="/var/run"
+	S="myscript.pid"
+	touch "$D/$S"
+	chmod 766 "$D/$S"
+	echo $$ > "$D/$S"
+	trap "trap_sigquit_term" SIGTERM
+	trap '
+	rm -f "$D/$S" 2>/dev/null
+	exit 0
+	' SIGQUIT
+	trap "trap_sigint" SIGINT
+	while true
+	do
+		echo "To infinity and beyond"
+		sleep 2
+	
+
+	done
+}
+
+
+
+function trap_sigint()	{
+	echo "Y U no love me?!"
+}
+
+
+function trap_sigquit_term()	{
+	rm -f "/var/run/myscript.pid" 2>/dev/null
+	echo "I hate the kill command"
+	exit 0
+}
+infinite
