@@ -1,5 +1,5 @@
 # Alx System Engineering Devops
-_Most of the tasks revolved arou _
+
 ## [0x00-shell_basics](0x00-shell_basics)
   * Shell & Bash Terminal in the Linux environment
   * **RTFM**
