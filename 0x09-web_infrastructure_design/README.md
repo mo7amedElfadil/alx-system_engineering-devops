@@ -1,7 +1,7 @@
 # 0x09-web_infrastructure_design
 
 ## 0. Simple web stack
-![Simple Web Stack](images/0. Simple web stack.drawio.png)
+![Simple Web Stack](images/0.%20Simple%20web%20stack.drawio.png)
 
 ### Specifics about this infrastructure:
 
@@ -44,7 +44,7 @@
 
 ## 1. Distributed web infrastructure
 
-![Distributed web infrastructure](images/1. Distributed web infrastructure.drawio.png)
+![Distributed web infrastructure](images/1.%20Distributed%20web%20infrastructure.drawio.png)
 
 ### Specifics about this infrastructure:
 
@@ -92,7 +92,7 @@
 	Having no monitoring will prevent visualization of the different parts of the system, and it makes it difficult to identify any issues promptly
 
 ## 2. Secured and monitored web infrastructure
-![Secured and monitored web infrastructure](images/2. Secured and monitored web infrastructure.drawio.png)
+![Secured and monitored web infrastructure](images/2.%20Secured%20and%20monitored%20web%20infrastructure.drawio.png)
 
 ### Specifics about this infrastructure:
 
@@ -142,7 +142,7 @@
 
 ## 3. Scale up
 ### Specifics about this infrastructure:
-![Scale up](images/3. Scale up.drawio.png)
+![Scale up](images/3.%20Scale%20up.drawio.png)
 
 - For every additional element, why you are adding it
     
