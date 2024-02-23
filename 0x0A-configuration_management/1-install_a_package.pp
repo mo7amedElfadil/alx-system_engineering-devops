@@ -1,5 +1,3 @@
-# class to install python3, pip3, werkzeug and flask
-class myapp::install {
 
 # install python3
   package { 'python3':
@@ -23,7 +21,3 @@ class myapp::install {
     ensure   => '2.1.0',
     provider => 'pip3',
   }
-}
-node default {
-  include myapp::install
-}
