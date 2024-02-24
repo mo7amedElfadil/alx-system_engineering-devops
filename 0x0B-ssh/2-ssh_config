@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# configure local ssh client to connect to remote server
+# without password
+# The following is the SSH client configuration file
+
+Host school
+	HostName 54.144.238.161
+    User ubuntu
+    IdentityFile ~/.ssh/school
+	PasswordAuthentication no

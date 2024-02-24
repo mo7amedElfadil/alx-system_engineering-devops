@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This script is used to demonstrate how to use a private key to authenticate to a remote server
+# The private key is stored in a file called school
+# the path is ~/.ssh/school
+# the user = ubuntu
+# Requirements:
+# only use ssh single-character flags
+# do not use the -l flag
+# do not handle the case of a private key with a passphrase
+
+ssh -i ~/.ssh/school ubuntu@54.144.238.161
+
+
