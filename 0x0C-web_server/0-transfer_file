@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This script is used to transfer files from local to remote server
+# Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY
+
+if [ "$#" -lt 3 ]; then
+    echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+    exit 1
+fi
+
+FILE="$1"
+IP="$2"
+USER="$3"
+path_to_ssh_key="$4"
+if [ "$#" -eq 3 ]; then
+	scp -o StrictHostKeyChecking=no "$FILE" "$USER@$IP":~/
+else
+	scp -o StrictHostKeyChecking=no -i "$path_to_ssh_key" "$FILE" "$USER@$IP":~/
+fi
+
