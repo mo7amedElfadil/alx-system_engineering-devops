@@ -18,7 +18,7 @@ echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
 old_str="\tlocation \/ {"
 new_str="\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}\n\n\tlocation \/ {"
-sudo sed -i "s|$old_str|$new_str|g" /etc/nginx/sites-available/default
+sudo sed -i "s|$old_str|$new_str" /etc/nginx/sites-available/default
 
 # reload nginx
 sudo service nginx reload
