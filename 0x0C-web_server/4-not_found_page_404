@@ -20,7 +20,12 @@ echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
 old_str="\tlocation \/ {"
 new_str="\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}\n\n\tlocation \/ {"
 sudo sed -i "s|$old_str|$new_str|" /etc/nginx/sites-available/default
-str_404="\terror_page 404 \/404.html;\n   location = \/404.html {\n 	  root \/var\/www\/html;\n        internal;\n    }"
+str_404="\\
+    error_page 404 /404.html;\\
+    location = /404.html {\\
+        root /var/www/html;\\
+        internal;\\
+    }"
 sudo sed -i "/server_name _;/a $str_404" /etc/nginx/sites-available/default
 
 # reload nginx
