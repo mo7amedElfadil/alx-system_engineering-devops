@@ -21,26 +21,25 @@ echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
 # update configuration file so /redirect_me is redirecting to another page
 
-new_str="\\
-	location /redirect_me {\\
-		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\\
-		}\\
-	\\
-	location / {"
-if ! string_exists "return 301 https" /etc/nginx/sites-available/default; then
-	sudo sed -i "/server_name _;/a $new_str" /etc/nginx/sites-available/default
-fi
+my_setup="server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	location / {
+		try_files \$uri \$uri/ @404;
+	}
+	location /redirect_me {
+		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+	}
+	error_page 404 /404.html;
+	location = /404.html {
+		root /var/www/html;
+		internal;
+	}
+}" 
+	echo -e "$my_setup" | sudo tee /etc/nginx/sites-available/default > /dev/null
 
-# update configuration file so /404 is redirecting to another page
-str_404="\\
-	error_page 404 /404.html;\\
-	location = /404.html {\\
-		root /var/www/html;\\
-		internal;\\
-	}"
-if ! string_exists "error_page 404 /404.html;" /etc/nginx/sites-available/default; then
-	sudo sed -i "/server_name _;/a $str_404" /etc/nginx/sites-available/default
-fi
 
 # reload nginx
 sudo service nginx restart
