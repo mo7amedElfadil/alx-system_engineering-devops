@@ -7,13 +7,15 @@ string_exists() {
     awk -v str="$1" '$0 ~ str { found = 1; exit } END { exit !found }' "$2"
 }
 
-if [ "$(dpkg-query -W -f='${Status}' nginx 2>/dev/null | grep -c "ok installed")" -eq 0 ];
-then
-	sudo apt-get update -y
-	sudo apt-get install nginx -y
-# else
-	# echo "Nginx is already installed"
-fi
+# if [ "$(dpkg-query -W -f='${Status}' nginx 2>/dev/null | grep -c "ok installed")" -eq 0 ];
+# then
+# 	sudo apt-get update -y
+# 	sudo apt-get install nginx -y
+# # else
+# 	# echo "Nginx is already installed"
+# fi
+sudo apt-get update -y
+sudo apt-get install nginx -y
 # nginx should list on port 80
 sudo ufw allow 'Nginx HTTP'
 # create file to test nginx
