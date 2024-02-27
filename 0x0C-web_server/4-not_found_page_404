@@ -26,14 +26,16 @@ new_str="\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/w
 if ! string_exists "return 301 https" /etc/nginx/sites-available/default; then
 	sudo sed -i "s|$old_str|$new_str|" /etc/nginx/sites-available/default
 fi
+
+# update configuration file so /404 is redirecting to another page
 str_404="\\
-    error_page 404 /404.html;\\
-    location = /404.html {\\
-        root /var/www/html;\\
-        internal;\\
-    }"
+		error_page 404 /404.html;\\
+		location = /404.html {\\
+			root /var/www/html;\\
+			internal;\\
+		}"
 if ! string_exists "error_page 404 /404.html;" /etc/nginx/sites-available/default; then
-	sudo sed -i "/server_name _;/a $str_404" /etc/nginx/sites-available/default
+	sudo sed -i "/server_name default_server;/a \n$str_404" /etc/nginx/sites-available/default
 fi
 
 # reload nginx
