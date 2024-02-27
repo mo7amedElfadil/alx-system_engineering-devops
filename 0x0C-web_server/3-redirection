@@ -7,8 +7,8 @@ if [ "$(dpkg-query -W -f='${Status}' nginx 2>/dev/null | grep -c "ok installed")
 then
 	sudo apt-get update -y
 	sudo apt-get install nginx -y
-else
-	echo "Nginx is already installed"
+# else
+	# echo "Nginx is already installed"
 fi
 # nginx should list on port 80
 sudo ufw allow 'Nginx HTTP'
