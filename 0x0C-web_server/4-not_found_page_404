@@ -3,6 +3,10 @@
 # update package information
 # install nginx
 # check if nginx is installed
+string_exists() {
+    awk -v str="$1" '$0 ~ str { found = 1; exit } END { exit !found }' "$2"
+}
+
 if [ "$(dpkg-query -W -f='${Status}' nginx 2>/dev/null | grep -c "ok installed")" -eq 0 ];
 then
 	sudo apt-get update -y
@@ -19,14 +23,18 @@ echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
 
 old_str="\tlocation \/ {"
 new_str="\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}\n\n\tlocation \/ {"
-sudo sed -i "s|$old_str|$new_str|" /etc/nginx/sites-available/default
+if ! string_exists "return 301 https" /etc/nginx/sites-available/default; then
+	sudo sed -i "s|$old_str|$new_str|" /etc/nginx/sites-available/default
+fi
 str_404="\\
     error_page 404 /404.html;\\
     location = /404.html {\\
         root /var/www/html;\\
         internal;\\
     }"
-sudo sed -i "/server_name _;/a $str_404" /etc/nginx/sites-available/default
+if ! string_exists "error_page 404 /404.html;" /etc/nginx/sites-available/default; then
+	sudo sed -i "/server_name _;/a $str_404" /etc/nginx/sites-available/default
+fi
 
 # reload nginx
 sudo service nginx restart
