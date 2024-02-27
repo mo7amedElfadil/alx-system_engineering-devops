@@ -11,9 +11,6 @@ file { '/var/www/html/index.html':
   require => Package['nginx'],
 }
 # modify the default nginx configuration
-$new_string = "location /redirect_me {\\
-		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\\
-}"
 file { '/etc/nginx/sites-available/default':
   ensure  => file,
   content => "server {
@@ -31,7 +28,8 @@ file { '/etc/nginx/sites-available/default':
   mode    => '0644',
 }
 service {'nginx':
-  ensure  => 'running',
-  enable  => true,
-  require => Package['nginx'],
+  ensure    => 'running',
+  enable    => true,
+  require   => Package['nginx'],
+  subscribe => File['/etc/nginx/sites-available/default'],
 }
