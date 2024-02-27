@@ -19,9 +19,9 @@ fi
 
 container_id=$(docker run -p 8080:80 -d -it holbertonschool/265-0) > /dev/null 2>&1
 
+# sudo service apache2 start
 docker exec -it "$container_id" service apache2 start > /dev/null 2>&1
 curl 0:8080
 # ask to stop the container
 # read -p "Press [Enter] key to stop the container..."
-docker stop "$container_id" > /dev/null 2>&1
-# sudo service apache2 start
+# docker stop "$container_id" > /dev/null 2>&1
