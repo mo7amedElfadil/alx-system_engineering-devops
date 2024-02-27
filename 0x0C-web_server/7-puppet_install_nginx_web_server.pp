@@ -22,15 +22,13 @@ file { '/etc/nginx/sites-available/default':
 	root /var/www/html;
 	index index.html index.htm index.nginx-debian.html;
 	location / {
-		try_files \$uri \$uri/ @404;
+		try_files \$uri \$uri/ =404;
 	}
 	location /redirect_me {
 		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
 	}
 }",
   mode    => '0644',
-  require => Package['nginx'],
-  notify  => Service['nginx'],
 }
 service {'nginx':
   ensure  => 'running',
