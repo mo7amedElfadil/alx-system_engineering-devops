@@ -2,7 +2,7 @@
 # executes file 0-transfer_file with args
 path=$(dirname "$(dirname "$0")")/0-transfer_file
 FILE=some_page.html
-IP=54.144.238.161
+IP=$SERVER
 USER=ubuntu
 path_to_ssh_key=~/.ssh/id_rsa
 

@@ -8,3 +8,5 @@
 !/1-install_nginx_web_server
 !/main_files/
 !/main_files/*
+!/2-setup_a_domain_name
+!/3-redirection
