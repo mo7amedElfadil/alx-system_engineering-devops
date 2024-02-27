@@ -7,8 +7,8 @@ package { 'nginx':
 file { '/var/www/html/index.html':
   ensure  => file,
   content => 'Hello world!',
-  require => Package['nginx'],
   mode    => '0644',
+  require => Package['nginx'],
 }
 # modify the default nginx configuration
 $new_string = "location /redirect_me {\\
@@ -19,7 +19,7 @@ exec { 'redirect_me':
   command => "sudo sed -i '/server_name _;/a ${new_string}' /etc/nginx/sites-available/default",
 }
 service {'nginx':
-  ensure  => running,
+  ensure  => 'running',
   enable  => true,
   require => Package['nginx'],
 }
