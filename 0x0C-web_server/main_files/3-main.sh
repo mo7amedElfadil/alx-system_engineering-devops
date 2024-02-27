@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # this script transfers and runs a shell script that installs nginx on a web server
 
-path_to_install=$(dirname "$(dirname "$0")")/3-redirection
 path=$(dirname "$(dirname "$0")")/0-transfer_file
 installer=3-redirection
 IP=$SERVER

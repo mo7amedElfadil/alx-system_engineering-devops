@@ -1,0 +1,7 @@
+*
+!/*.sh
+!/.gitignore
+!/README.md
+!/LICENSE
+*main.sh
+!/0-give_me_a_page
