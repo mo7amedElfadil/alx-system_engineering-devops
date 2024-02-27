@@ -20,9 +20,13 @@ fi
 echo "Checking if file exists remotely"
 ssh -i "$path_to_ssh_key" "$USER@$IP" "test -f ~/$installer"
 if [ $? -eq 0 ]; then
-    echo "file exists remotely. Executing the file..."
-    ssh -i $path_to_ssh_key $USER@$IP "./$installer;"
-	# rm -f ~/$installer"
+    echo "file exists remotely. Executing the file...?"
+	read -p "install? (y/n) " -n 1 -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		ssh -i $path_to_ssh_key $USER@$IP "./$installer;"
+	else
+		echo "file exists remotely. Not executing the file"
+	fi
 else
     echo "file does not exist remotely"
     ssh -i $path_to_ssh_key $USER@$IP 'ls ~/'
@@ -36,10 +40,14 @@ else
 	exit 1
 fi
 
-if curl -s "$IP/redirect_me" | grep -q "HTTP/1.1 301 Moved Permanently"; then
-	echo "redirect is working"
+if curl_output=$(curl -sI "$IP/redirect_me" | head -n 1); then
+    if echo "$curl_output" | grep -q "HTTP/1.1 301 Moved Permanently"; then
+        echo "Redirect is working"
+    else
+        echo "Expected redirect status not found in the first line of HTTP response"
+        exit 1
+    fi
 else
-	echo "redirect is not working"
-	exit 1
+    echo "Failed to retrieve HTTP response"
+    exit 1
 fi
-
