@@ -1,13 +1,12 @@
 # install nginx
 class nginx {
   package { 'nginx':
-    ensure => 'installed',
+    ensure => installed,
   }
-  # create a file with content
+
   file { '/var/www/html/index.html':
     ensure  => file,
-    content => 'Hello world!
-	',
+    content => 'Hello world!',
     require => Package['nginx'],
   }
 
@@ -15,7 +14,7 @@ class nginx {
   file { '/etc/nginx/sites-available/default':
     ensure  => file,
     content => "
-    server {
+	  server {
 		listen 80 default_server;
 		listen [::]:80 default_server;
 		root /var/www/html;
@@ -31,8 +30,9 @@ class nginx {
   ",
     require => Package['nginx'],
   }
+
   service {'nginx':
-    ensure    => 'running',
+    ensure    => running,
     enable    => true,
     subscribe => File['/etc/nginx/sites-available/default'],
   }
