@@ -26,6 +26,8 @@ echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 #	sudo sed -i "s#$old_str#$new_str#" /etc/nginx/sites-available/default
 #fi
 ## sudo sed -i "/server_name _;/a \\\trewrite ^\/redirect_me$ https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
-## reload nginx
-#sudo service nginx restart
+
+# reload nginx
+
+sudo service nginx restart
 
