@@ -21,7 +21,11 @@ echo "Checking if file exists remotely"
 ssh -i "$path_to_ssh_key" "$USER@$IP" "test -f ~/$installer"
 if [ $? -eq 0 ]; then
     echo "file exists remotely. Executing the file...?"
-	read -p "install? (y/n) " -n 1 -r
+	if [ "$1" == '-y' ]; then
+		REPLY='y'
+	else
+		read -p "install? (y/n) " -n 1 -r
+	fi
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		ssh -i $path_to_ssh_key $USER@$IP "./$installer; rm -f ~/$installer"
 	else
