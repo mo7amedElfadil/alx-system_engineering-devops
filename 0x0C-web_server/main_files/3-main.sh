@@ -23,7 +23,7 @@ if [ $? -eq 0 ]; then
     echo "file exists remotely. Executing the file...?"
 	read -p "install? (y/n) " -n 1 -r
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		ssh -i $path_to_ssh_key $USER@$IP "./$installer;"
+		ssh -i $path_to_ssh_key $USER@$IP "./$installer; rm -f ~/$installer"
 	else
 		echo "file exists remotely. Not executing the file"
 	fi
