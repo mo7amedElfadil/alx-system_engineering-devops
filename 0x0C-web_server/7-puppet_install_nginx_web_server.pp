@@ -6,7 +6,8 @@ package { 'nginx':
 # create a file with content
 file { '/var/www/html/index.html':
   ensure  => file,
-  content => 'Hello world!',
+  content => 'Hello world!
+',
   mode    => '0644',
   require => Package['nginx'],
 }
@@ -25,7 +26,8 @@ file { '/etc/nginx/sites-available/default':
 	location /redirect_me {
 		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
 	}
-}",
+}
+",
   mode    => '0644',
   require => Package['nginx'],
 }
