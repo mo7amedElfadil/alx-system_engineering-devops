@@ -21,10 +21,14 @@ echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
 # update configuration file so /redirect_me is redirecting to another page
 
-old_str="\tlocation \/ {"
-new_str="\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}\n\n\tlocation \/ {"
+new_str="\\
+	location /redirect_me {\\
+		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\\
+		}\\
+	\\
+	location / {"
 if ! string_exists "return 301 https" /etc/nginx/sites-available/default; then
-	sudo sed -i "s|$old_str|$new_str|" /etc/nginx/sites-available/default
+	sudo sed -i "/server_name _;/a $new_str" /etc/nginx/sites-available/default
 fi
 
 # update configuration file so /404 is redirecting to another page
@@ -35,7 +39,7 @@ str_404="\\
 		internal;\\
 	}"
 if ! string_exists "error_page 404 /404.html;" /etc/nginx/sites-available/default; then
-	sudo sed -i "/server_name default_server;/a $str_404" /etc/nginx/sites-available/default
+	sudo sed -i "/server_name _;/a $str_404" /etc/nginx/sites-available/default
 fi
 
 # reload nginx
