@@ -17,7 +17,8 @@ file { '/etc/nginx/sites-available/default':
 	listen 80 default_server;
 	listen [::]:80 default_server;
 	root /var/www/html;
-	index index.html index.htm index.nginx-debian.html;
+	index index.html;
+	server_name _;
 	location / {
 		try_files \$uri \$uri/ =404;
 	}
@@ -26,6 +27,7 @@ file { '/etc/nginx/sites-available/default':
 	}
 }",
   mode    => '0644',
+  require => Package['nginx'],
 }
 service {'nginx':
   ensure    => 'running',
