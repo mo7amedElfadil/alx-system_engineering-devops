@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
 # Install and configure HAproxy on your lb-01 server.
 
-if [ "$(dpkg-query -W -f='${Status}' haproxy 2>/dev/null | grep -c "ok installed")" -eq 0 ];
+if ! command -v haproxy &>/dev/null;
 then
-	sudo apt-get install --no-install-recommends software-properties-common
+	sudo apt-get install -y --no-install-recommends software-properties-common
 	sudo add-apt-repository -y ppa:vbernat/haproxy-2.8
 	sudo apt-get update -y
 	sudo apt-get install -y haproxy=2.8.\*
 
 fi
 
-sudo systemctl stop haproxy
-echo "ENABLED=1" | sudo  tee -a /etc/default/haproxy
 
-sudo systemctl start haproxy
+sudo systemctl restart haproxy
 sudo systemctl enable haproxy
+
 my_config="global
 	log /dev/log	local0
 	log /dev/log	local1 notice
@@ -51,4 +50,4 @@ if  ! sudo haproxy -c -f /etc/haproxy/haproxy.cfg > /dev/null ; then
     echo "Error: HAProxy configuration check failed. Please fix the configuration."
 fi
 
-sudo systemctl restart haproxy
+# sudo systemctl restart haproxy
