@@ -7,10 +7,11 @@ class nginx {
     ensure  => installed,
     require => Exec['update'],
   }
+  $host = "\$hostname"
   file_line { 'header':
     path     => '/etc/nginx/sites-available/default',
     match    => '^location / {',
-    line     => "location / {\n\tadd_header X-Served-By \"${HOSTNAME}\";",
+    line     => "location / {\n\tadd_header X-Served-By \"${host}\";",
     multiple => false,
     notify   => Exec['run'],
   }
