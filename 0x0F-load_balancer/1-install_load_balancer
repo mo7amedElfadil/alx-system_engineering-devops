@@ -7,22 +7,22 @@ then
 	sudo apt-get install -y haproxy
 fi
 
-sudo systemctl start haproxy
-sudo systemctl enable haproxy
-
-sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
-
 my_config="
-frontend http80
-	bind *:80
-	timeout client  60s
-	mode http
-	default_backend servers
+global
+	daemon
+	maxconn 256
 
-backend servers
-	timeout connect 10s
-	timeout server 60s
+defaults
 	mode http
+	timeout connect 5000ms
+	timeout client 50000ms
+	timeout server 50000ms
+
+frontend frontends
+	bind *:80
+	default_backend backends
+
+backend backends
 	balance roundrobin
 	server web-01 54.144.238.161 check
 	server web-02 100.25.154.52 check
@@ -31,5 +31,5 @@ backend servers
 echo -e "$my_config" | sudo tee /etc/haproxy/my_config.cfg > /dev/null
 
 sudo haproxy -c -f /etc/haproxy/my_config.cfg
-
-sudo systemctl restart haproxy
+sudo systemctl start haproxy
+sudo systemctl enable haproxy
