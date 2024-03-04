@@ -30,7 +30,7 @@ class nginx {
   exec {'run':
     command     => '/usr/sbin/service nginx restart',
     refreshonly => true,
-    subscribe   => File_line['header'],
+    subscribe   => File['/etc/nginx/sites-available/default'],
   }
 }
 include nginx
