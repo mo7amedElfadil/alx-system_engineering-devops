@@ -10,7 +10,7 @@ class nginx {
   file_line { 'header':
     path     => '/etc/nginx/sites-available/default',
     match    => '^location / {',
-    line     => "location / {\n\tadd_header X-Served-By \"${hostname}\";",
+    line     => "location / {\n\tadd_header X-Served-By \"${HOSTNAME}\";",
     multiple => false,
     notify   => Exec['run'],
   }
