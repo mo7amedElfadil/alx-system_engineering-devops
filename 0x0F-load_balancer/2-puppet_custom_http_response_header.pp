@@ -7,13 +7,25 @@ class nginx {
     ensure  => installed,
     require => Exec['update'],
   }
-  $host = "\$hostname"
-  file_line { 'header':
-    path     => '/etc/nginx/sites-available/default',
-    match    => '^location / {',
-    line     => "location / {\n\tadd_header X-Served-By \"${host}\";",
-    multiple => false,
-    notify   => Exec['run'],
+  file { '/etc/nginx/sites-available/default':
+    ensure  => file,
+    content => "
+      server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        index index.html;
+        server_name _;
+        location / {
+		  add_header X-Served-By ${HOSTNAME};
+          try_files \$uri \$uri/ =404;
+        }
+        location /redirect_me {
+          return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+        }
+      }
+    ",
+    require => Package['nginx'],
   }
   exec {'run':
     command     => '/usr/sbin/service nginx restart',
