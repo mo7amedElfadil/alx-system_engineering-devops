@@ -16,11 +16,13 @@ my_config="
 frontend http80
 	bind *:80
 	timeout client  60s
+	mode http
 	default_backend servers
 
 backend servers
 	timeout connect 10s
 	timeout server 60s
+	mode http
 	server web-01 54.144.238.161
 	server web-02 100.25.154.52
 	"
