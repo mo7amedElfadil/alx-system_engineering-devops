@@ -11,7 +11,7 @@ then
 fi
 
 sudo systemctl stop haproxy
-echo "ENABLED=1" | sudo -a tee /etc/default/haproxy
+echo "ENABLED=1" | sudo  tee -a /etc/default/haproxy
 
 sudo systemctl start haproxy
 sudo systemctl enable haproxy
