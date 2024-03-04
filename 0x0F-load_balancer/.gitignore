@@ -8,3 +8,4 @@
 !/main_files/*
 !/0-custom_http_response_header
 !/transfer_file
+!/1-install_load_balancer
