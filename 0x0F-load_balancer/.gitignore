@@ -1,0 +1,10 @@
+*
+!/*.sh
+!/.gitignore
+!/README.md
+!/LICENSE
+*main.sh
+!/main_files/
+!/main_files/*
+!/0-custom_http_response_header
+!/transfer_file
