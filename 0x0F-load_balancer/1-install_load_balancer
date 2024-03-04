@@ -23,8 +23,9 @@ backend servers
 	timeout connect 10s
 	timeout server 60s
 	mode http
-	server web-01 54.144.238.161
-	server web-02 100.25.154.52
+	balance roundrobin
+	server web-01 54.144.238.161 check
+	server web-02 100.25.154.52 check
 	"
 
 echo -e "$my_config" | sudo tee /etc/haproxy/my_config.cfg > /dev/null
