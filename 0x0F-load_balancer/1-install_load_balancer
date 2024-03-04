@@ -7,8 +7,7 @@ then
 	sudo apt-get install -y haproxy
 fi
 
-my_config="
-global
+my_config="global
 	daemon
 	maxconn 256
 
