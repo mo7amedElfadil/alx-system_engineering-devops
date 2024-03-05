@@ -21,8 +21,7 @@ my_config="backend http_backends
 frontend http_front
 	bind *:80
 	mode http
-	default_backend http_backends
-	"
+	default_backend http_backends"
 
 echo -e "$my_config" | sudo tee /etc/haproxy/haproxy.cfg > /dev/null
 

@@ -19,9 +19,9 @@ do
 	res=$(curl -sI "$SERVER3LB")
 	if echo "$res" | grep -q "X-Served-By"; then
 		res=$(echo "$res" | grep  "X-Served-By")
-		echo -e "${COLOR_GREEN}$res ${RESET}"
+		echo -e "${COLOR_GREEN} $res ${RESET}"
 	else
 		res=$(echo "$res" | grep  "x-served-by")
-		echo -e "${COLOR_RED}$res ${RESET}"
+		echo -e "${COLOR_RED} $res ${RESET}"
 	fi
 done
