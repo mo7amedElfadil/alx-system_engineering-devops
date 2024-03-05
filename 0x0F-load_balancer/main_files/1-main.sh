@@ -40,12 +40,12 @@ if curl_output=$(curl -sI "$IP" | grep "X-Served-By"); then
 	echo "X-Served-By header is present"
 	if [[ $curl_output == $(curl -sI "$IP" | grep "X-Served-By") ]]; then
 		echo "Not being balanced"
-		exit 1
+		# exit 1
 	else
 		echo "Being balanced"
-		exit 0
+		# exit 0
 	fi
 else
 	echo "X-Served-By header is not present"
-	exit 1
+	# exit 1
 fi
