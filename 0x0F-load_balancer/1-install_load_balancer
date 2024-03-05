@@ -3,24 +3,29 @@
 
 if ! command -v haproxy &>/dev/null;
 then
-    apt-get update -y
-    apt-get install -y haproxy
+    sudo apt-get update -y
+    sudo apt-get install -y haproxy
 
 fi
 
 echo "ENABLED=1" >> /etc/default/haproxy
-systemctl enable haproxy
+sudo systemctl enable haproxy
 
-my_config="frontend http
+my_config="frontend http_front
     bind *:80
-    mode http
     default_backend http_backends
 
 backend http_backends
     balance roundrobin
     server 507480-web-01 54.144.238.161:80 check
-    server 507480-web-02 100.25.154.52:80 check"
+    server 507480-web-02 100.25.154.52:80 check
+    "
 
-echo -e "$my_config" | tee /etc/haproxy/haproxy.cfg > /dev/null
+echo -e "$my_config" | sudo tee /etc/haproxy/haproxy.cfg > /dev/null
 
-service haproxy restart
+
+# if  ! sudo haproxy -c -f /etc/haproxy/haproxy.cfg > /dev/null ; then
+#     echo "Error: HAProxy configuration check failed. Please fix the configuration."
+# fi
+
+sudo service haproxy restart
