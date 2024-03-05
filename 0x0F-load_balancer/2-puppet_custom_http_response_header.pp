@@ -1,13 +1,12 @@
 # install and configure nginx
-class nginx {
-  exec { 'update':
+exec { 'update':
     command => '/usr/bin/apt-get update',
 }
-  package { 'nginx':
+package { 'nginx':
     ensure  => installed,
     require => Exec['update'],
   }
-  file { '/etc/nginx/sites-available/default':
+file { '/etc/nginx/sites-available/default':
     ensure  => file,
     content => "
 server {
@@ -27,10 +26,8 @@ server {
 ",
     require => Package['nginx'],
   }
-  exec {'run':
+exec {'run':
     command     => '/usr/sbin/service nginx restart',
     refreshonly => true,
     subscribe   => File['/etc/nginx/sites-available/default'],
   }
-}
-include nginx
