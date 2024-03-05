@@ -13,20 +13,15 @@ fi
 echo "ENABLED=1" | sudo tee /etc/default/haproxy > /dev/null
 # sudo systemctl enable haproxy
 
-my_config="defaults
-	mode http
-	timeout connect 5s
-	timeout client 50s
-	timeout server 50s
-
-frontend http_front
-	bind *:80
-	default_backend http_backends
-
-backend http_backends
+my_config="backend http_backends
 	balance roundrobin
+	mode http
 	server 507480-web-01 54.144.238.161:80 check
 	server 507480-web-02 100.25.154.52:80 check
+frontend http_front
+	bind *:80
+	mode http
+	default_backend http_backends
 	"
 
 echo -e "$my_config" | sudo tee /etc/haproxy/haproxy.cfg > /dev/null
