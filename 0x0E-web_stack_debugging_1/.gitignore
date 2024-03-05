@@ -1,0 +1,7 @@
+*
+!/*.sh
+!/.gitignore
+!/README.md
+!/LICENSE
+*main.sh
+!/0-nginx_likes_port_80
