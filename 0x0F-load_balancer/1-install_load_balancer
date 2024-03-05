@@ -10,13 +10,10 @@ then
 
 fi
 
-
-sudo systemctl enable haproxy
-
-echo "ENABLED=1" >> /etc/default/haproxy
+echo "ENABLED=1" | sudo tee /etc/default/haproxy > /dev/null
+# sudo systemctl enable haproxy
 
 my_config="defaults
-	log	global
 	mode http
 	timeout connect 5s
 	timeout client 50s
@@ -35,8 +32,8 @@ backend http_backends
 echo -e "$my_config" | sudo tee /etc/haproxy/haproxy.cfg > /dev/null
 
 
-if  ! sudo haproxy -c -f /etc/haproxy/haproxy.cfg > /dev/null ; then
-    echo "Error: HAProxy configuration check failed. Please fix the configuration."
-fi
+# if  ! sudo haproxy -c -f /etc/haproxy/haproxy.cfg > /dev/null ; then
+#     echo "Error: HAProxy configuration check failed. Please fix the configuration."
+# fi
 
-sudo service haproxy restart
+service haproxy restart
