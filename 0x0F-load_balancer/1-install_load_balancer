@@ -50,4 +50,4 @@ if  ! sudo haproxy -c -f /etc/haproxy/haproxy.cfg > /dev/null ; then
     echo "Error: HAProxy configuration check failed. Please fix the configuration."
 fi
 
-# sudo systemctl restart haproxy
+sudo systemctl restart haproxy
