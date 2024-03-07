@@ -8,3 +8,4 @@ install_cert.sh
 !/1-haproxy_ssl_termination
 99-install_cert.sh
 !/0-world_wide_web
+!/100-redirect_http_to_https
