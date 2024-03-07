@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 # 0-nginx_likes_port_80
-if [ $(dpkg-query -W -f='${Status}' nginx 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-	sudo apt-get update -y
-	sudo apt-get install nginx -y
-else
-	echo "Nginx is already installed"
-fi
-# nginx should list on port 80
+sudo apt-get update -y
+sudo apt-get install nginx -y
 sudo service nginx restart
