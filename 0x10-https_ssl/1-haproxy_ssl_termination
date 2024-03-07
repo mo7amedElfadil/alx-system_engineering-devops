@@ -1,0 +1,17 @@
+frontend http_front
+    bind *:80
+    bind *:443 ssl crt /etc/letsencrypt/live/www.mo7amed.tech/haproxy.pem
+    redirect scheme https if !{ ssl_fc }
+    default_backend http_backends
+    timeout client 60s
+    timeout server 60s
+    timeout connect 10s
+
+backend http_backends
+    balance roundrobin
+    server 507480-web-01 54.144.238.161:80 check
+    server 507480-web-02 100.25.154.52:80 check
+    timeout client 60s
+    timeout server 60s
+    timeout connect 10s
+

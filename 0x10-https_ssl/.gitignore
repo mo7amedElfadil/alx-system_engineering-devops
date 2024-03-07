@@ -1,0 +1,10 @@
+*
+!/*.sh
+!/.gitignore
+!/README.md
+!/LICENSE
+*main.sh
+install_cert.sh
+!/1-haproxy_ssl_termination
+99-install_cert.sh
+!/0-world_wide_web

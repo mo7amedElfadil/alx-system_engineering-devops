@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# displays information about sub domains
+subdomains() {
+	if [ -z "$1" ] || [ -z "$2" ]; then
+		echo "Usage: subdomains domain.com subdomain"
+		return
+	fi
+	IFS=' ' read -r -a array<<< "$(dig "$2"."$1" | grep -A1 'ANSWER SECTION' | tail -n1 | awk '{print $4, $NF}')"
+	echo "The subdomain $2 is a ${array[0]} record and points to ${array[1]}"
+}
+
+
+if [ $# -lt 1 ]; then
+	echo "Usage: $0 domain.com [subdomain]"
+	exit 1
+fi
+
+if [ $# -eq 1 ]; then
+	subdomain_list=('www' 'lb-01'  'web-01' 'web-02')
+
+	for subdomain in "${subdomain_list[@]}"; do
+		subdomains "$1" "$subdomain"
+done
+
+else
+	subdomains "$1" "$2"
+fi
