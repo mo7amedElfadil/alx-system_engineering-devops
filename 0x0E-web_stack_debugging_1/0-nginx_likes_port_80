@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 # 0-nginx_likes_port_80
-sudo apt-get update -y
-sudo apt-get install nginx -y
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 sudo service nginx restart
