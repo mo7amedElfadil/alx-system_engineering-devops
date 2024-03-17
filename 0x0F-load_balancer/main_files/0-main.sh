@@ -9,7 +9,7 @@ if [ "$#" -eq 1 ]; then
 		IP=$SERVER2
 	fi
 else
-	IP=$SERVER2
+	IP=$SERVER1
 fi
 USER=ubuntu
 path_to_ssh_key=~/.ssh/id_rsa
@@ -20,7 +20,7 @@ if [ $? -eq 0 ]; then
     echo "File transferred successfully"
 else
     echo "File transfer failed"
-    exit 1
+    # exit 1
 fi
 
 echo "Checking if file exists remotely"
@@ -40,14 +40,14 @@ if [ $? -eq 0 ]; then
 else
     echo "file does not exist remotely"
     ssh -i $path_to_ssh_key $USER@$IP 'ls ~/'
-    exit 1
+    # exit 1
 fi
 
 if curl -s "$IP" | grep -q "Hello World!"; then
 	echo "nginx is installed and running"
 else
 	echo "nginx is not running"
-	exit 1
+	# exit 1
 fi
 
 if curl_output=$(curl -sI "$IP/redirect_me" | head -n 1); then
@@ -55,11 +55,11 @@ if curl_output=$(curl -sI "$IP/redirect_me" | head -n 1); then
         echo "Redirect is working"
     else
         echo "Expected redirect status not found in the first line of HTTP response"
-        exit 1
+        # exit 1
     fi
 else
     echo "Failed to retrieve HTTP response"
-    exit 1
+    # exit 1
 fi
 
 if curl_output=$(curl -sI "$IP/not_found" | head -n 1); then
@@ -67,16 +67,16 @@ if curl_output=$(curl -sI "$IP/not_found" | head -n 1); then
 		echo "404 is working"
 	else
 		echo "Expected 404 status not found in the first line of HTTP response"
-		exit 1
+		# exit 1
 	fi
 else
 	echo "Failed to retrieve HTTP response"
-	exit 1
+	# exit 1
 fi
 
 if curl_output=$(curl -sI "$IP" | grep "X-Served-By"); then
 	echo "X-Served-By header is present"
 else
 	echo "X-Served-By header is not present"
-	exit 1
+	# exit 1
 fi

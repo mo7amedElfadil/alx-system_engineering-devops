@@ -3,7 +3,7 @@
 
 path=$(dirname "$(dirname "$0")")/0-transfer_file
 installer=4-not_found_page_404
-IP=$SERVER
+IP=$SERVER1
 USER=ubuntu
 path_to_ssh_key=~/.ssh/id_rsa
 

@@ -17,9 +17,9 @@ my_config="frontend http_front
 
 backend http_backends
     balance roundrobin
-    server 507480-web-01 54.144.238.161:80 check
-    server 507480-web-02 100.25.154.52:80 check
-    "
+    server 507480-web-01 18.234.145.137:80 check
+    server 507480-web-02 54.196.49.246:80 check
+"
 
 echo -e "$my_config" | sudo tee /etc/haproxy/haproxy.cfg > /dev/null
 
