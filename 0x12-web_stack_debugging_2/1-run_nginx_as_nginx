@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+sudo chown nginx:nginx /etc/nginx/nginx.conf
+sudo chmod u+r /etc/nginx/nginx.conf
+
+sudo sed -i 's/^#user .*$/user nginx nginx;/' /etc/nginx/nginx.conf
+sed -i '/^.listen 80.*;/a	listen *:8080;'  /etc/nginx/sites-available/default
+sudo -u nginx /usr/sbin/nginx -c /etc/nginx/nginx.conf
+service nginx start
