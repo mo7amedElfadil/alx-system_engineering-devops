@@ -1,0 +1,6 @@
+*
+!/*.sh
+!/.gitignore
+!/README.md
+!/LICENSE
+*main.sh
