@@ -33,7 +33,7 @@ def print_employee_todo(responses):
     NUMBER_OF_DONE_TASKS = sum(1 for task in responses['todos']
                                if task['completed'])
     TOTAL_NUMBER_OF_TASKS = len(responses['todos'])
-    print("Employee {} is done with tasks({}/{})".format(EMPLOYEE_NAME,
+    print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
           NUMBER_OF_DONE_TASKS, TOTAL_NUMBER_OF_TASKS))
     for TASK in responses['todos']:
         print('\t {}'.format(TASK['title']))
