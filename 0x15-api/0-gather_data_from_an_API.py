@@ -30,12 +30,13 @@ def print_employee_todo(responses):
     if not responses:
         return
     EMPLOYEE_NAME = responses['users'][0]['name']
-    NUMBER_OF_DONE_TASKS = sum(1 for task in responses['todos']
-                               if task['completed'])
+    COMPLETED_TASKS = [task for task in responses['todos']
+                       if task['completed']]
+    NUMBER_OF_DONE_TASKS = len(COMPLETED_TASKS)
     TOTAL_NUMBER_OF_TASKS = len(responses['todos'])
     print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
           NUMBER_OF_DONE_TASKS, TOTAL_NUMBER_OF_TASKS))
-    for TASK in responses['todos']:
+    for TASK in COMPLETED_TASKS:
         print('\t {}'.format(TASK['title']))
 
 
