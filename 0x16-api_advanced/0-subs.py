@@ -12,11 +12,11 @@ def number_of_subscribers(subreddit):
     the function should return 0.
     """
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {'User-Agent': 'python3:1-subs:v1.0.0 (by /u/000)'}
     try:
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
-            result = response.json()["data"]["subscribers"]
+            result = response.json().get("data").get("subscribers")
             return result
     except (KeyError, ValueError):
         return 0
