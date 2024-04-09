@@ -44,5 +44,5 @@ def count_words(subreddit, word_list, after=None, word_dict={}):
         return
     if after is None:
         for key, value in sorted(word_dict.items(),
-                                    key=lambda x: (-x[1], x[0])):
+                                 key=lambda x: (-x[1], x[0])):
             print('{}: {}'.format(key, value))
