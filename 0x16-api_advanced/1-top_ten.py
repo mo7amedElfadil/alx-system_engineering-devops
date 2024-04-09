@@ -10,10 +10,14 @@ def top_ten(subreddit):
     listed for a given subreddit.
     """
     url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
-    response = requests.get(url, headers={"User-Agent": "mo7amed/1.0"},
-            allow_redirects=False)
-    if response.status_code != 200:
+    response = requests.get(url, headers={"User-Agent": "mo7amed/1.0"})
+    try:
+        response = requests.get(url, headers={"User-Agent": "mo7amed/1.0"})
+        if response.status_code == 200:
+            for post in response.json().get("data").get("children"):
+                print(post.get("data").get("title"))
+            return
+    except (KeyError, ValueError):
         print(None)
         return
-    for post in response.json().get("data").get("children"):
-        print(post.get("data").get("title"))
+    print(None)
