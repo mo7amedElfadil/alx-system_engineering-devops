@@ -1,0 +1,9 @@
+*
+!/*.sh
+!/.gitignore
+!/README.md
+!/LICENSE
+*main.sh
+dash.py
+ping_dd.py
+!/2-setup_datadog
