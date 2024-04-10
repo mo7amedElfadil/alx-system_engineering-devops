@@ -1,15 +1,9 @@
+#!/usr/bin/python3
+"""
+Module for number_of_subscribers function
+"""
 import requests
-import ssl
 
-
-class MyHTTPAdapter(requests.adapters.HTTPAdapter):
-    def init_poolmanager(self, connections, maxsize, block=False):
-        self.poolmanager = requests.packages.urllib3.poolmanager.PoolManager(
-            num_pools=connections,
-            maxsize=maxsize,
-            block=block,
-            ssl_version=ssl.PROTOCOL_TLSv1_2,
-        )
 
 def number_of_subscribers(subreddit):
     """
