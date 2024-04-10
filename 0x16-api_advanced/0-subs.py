@@ -1,8 +1,31 @@
-#!/usr/bin/python3
-"""
-Module for number_of_subscribers function
-"""
+import logging
+import platform
+
 import requests
+import ssl
+
+class MyHTTPAdapter(requests.adapters.HTTPAdapter):
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = requests.packages.urllib3.poolmanager.PoolManager(
+            num_pools=connections,
+            maxsize=maxsize,
+            block=block,
+            ssl_version=ssl.PROTOCOL_TLSv1_2,
+        )
+
+try:
+    import http.client
+except ImportError:
+    import httplib
+    httplib.HTTPConnection.debuglevel = 1
+else:
+    http.client.HTTPConnection.debuglevel = 1
+
+logging.basicConfig()
+logging.getLogger().setLevel(logging.DEBUG)
+requests_log = logging.getLogger("requests.packages.urllib3")
+requests_log.setLevel(logging.DEBUG)
+requests_log.propagate = True
 
 
 def number_of_subscribers(subreddit):
