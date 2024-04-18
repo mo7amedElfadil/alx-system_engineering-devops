@@ -1,3 +1,4 @@
+# user limits
 file { '/etc/security/limits.conf':
   ensure => present,
   notify => Exec['soft limit', 'hard limit'],
