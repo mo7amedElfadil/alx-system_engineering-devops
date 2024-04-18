@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 # reload gunicorn without downtime
-sudo systemctl show -p MainPID --value gunicorn | xargs kill -HUP
+worker_pids=$(sudo systemctl status gunicorn | grep 'Main PID' | awk '{print $3}')
+
+for pid in $worker_pids; do
+    sudo kill -s SIGUSR1 "$pid"
+    sleep 1 
+done
