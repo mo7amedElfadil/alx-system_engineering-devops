@@ -5,3 +5,5 @@
 !/LICENSE
 *main.py
 !/*-app_server*
+!/*reload*
+!/gunicorn.service
